@@ -1,0 +1,8 @@
+[submodule "api"]
+	path = api
+	url = git@github.com:joeyAghion/multiapp_example-api.git
+	branch = master
+[submodule "web"]
+	path = web
+	url = git@github.com:joeyAghion/multiapp_example-web.git
+	branch = master
