@@ -3,8 +3,6 @@ require 'childprocess'
 
 API_PORT = 7000
 WEB_PORT = 7001
-$api = nil
-$web = nil
 
 Capybara.configure do |config|
   config.current_driver = :selenium
@@ -63,7 +61,8 @@ def start_web
   $web = ChildProcess.build('node', 'app.js')
   $web.cwd = './web'
   $web.io.inherit!
-  $web.environment['API_URL'] = "http://localhost:#{API_PORT}"
+  $api_base_url = "http://#{api_client['key']}:@localhost:#{API_PORT}"
+  $web.environment['API_URL'] = $api_base_url
   $web.environment['PORT'] = WEB_PORT
   $web.start
   $stderr.puts "Waiting for web to start listening..."
@@ -77,4 +76,15 @@ end
 
 def listening_on?(port)
   system("netstat -an | grep #{port} | grep LISTEN")
+end
+
+def api_client
+  $api_client ||= begin
+    response = Net::HTTP.post_form(URI("http://localhost:#{API_PORT}/api/clients"), {})
+    JSON.parse(response.body)
+  end
+end
+
+def create_widget(params = {})
+  Net::HTTP.post_form(URI("#{$api_base_url}/api/widgets"), params)
 end
