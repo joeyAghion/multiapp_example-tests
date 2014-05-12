@@ -1,4 +1,6 @@
-This is an example test suite accompanying the [Testing Multiple Applications](http://artsy.github.io/blog/2014/05/12/testing-multiple-applications/) blog post. You'll find more detail there.
+This is an example test suite accompanying the [Continuous Integration For Service-Oriented Architectures](http://artsy.github.io/blog/2014/05/12/continuous-integration-for-service-oriented-architectures/) blog post. You'll find more detail there.
+
+See also the companion repositories, [multiapp_example-api](https://github.com/joeyAghion/multiapp_example-api) and [multiapp_example-web](https://github.com/joeyAghion/multiapp_example-web).
 
 Set-up
 ---
